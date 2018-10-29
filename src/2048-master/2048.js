@@ -1,5 +1,5 @@
 
-//import '../styles/main.css';
+import './main.css';
 
 import './js/bind_polyfill';
 import './js/classlist_polyfill';

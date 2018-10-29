@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
 return ({
     entry: {
       server: SERVER_PATH,
-      cards: './src/2048-master/2048.js',
+     // cards: './src/2048-master/2048.js',
     },
     output: {
       path: path.join(__dirname, 'dist'),

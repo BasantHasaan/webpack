@@ -56,7 +56,7 @@ module.exports = {
       {
         // Loads CSS into a file when you import it via Javascript
         // Rules are set in MiniCssExtractPlugin
-        test: /\.css$/,
+        test:/\.(sa|sc|c)ss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
     ]
