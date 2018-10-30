@@ -3,10 +3,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const MediaQueryPlugin = require('media-query-plugin');
 
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: './src/index.js',
+    cards: './src/2048-master/2048.js',
+    AlienInvasion: './src/AlienInvasion-master/base.js'
+
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -50,14 +54,25 @@ module.exports = {
       },
       {
         // Loads images into CSS and Javascript files
-        test: /\.jpg$/,
+       test: /\.(png|svg|jpg|gif)$/,
         use: [{loader: "url-loader"}]
+      },
+      {
+        // Loads images into CSS and Javascript files
+       test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{loader: "url-loader",
+        options: {
+          // limit: 50000,
+          // mimetype: "application/font-woff",
+          name: "./fonts/[name].[ext]", // Output below ./fonts
+          publicPath: "../", // Take the directory into account
+        }}],
       },
       {
         // Loads CSS into a file when you import it via Javascript
         // Rules are set in MiniCssExtractPlugin
         test:/\.(sa|sc|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader',MediaQueryPlugin.loader,'sass-loader']
       },
     ]
   },
@@ -66,9 +81,28 @@ module.exports = {
       template: "./src/html/index.html",
       filename: "./index.html"
     }),
+    new HtmlWebPackPlugin({
+      template: "./src/2048-master/index.html",
+      filename: "./cards.html",
+      chunks: ['cards'],
+     // excludeChunks: [ 'server' ]
+    }),  new HtmlWebPackPlugin({
+      template: "./src/AlienInvasion-master/index.html",
+      filename: "./AlienInvasion.html",
+      chunks: ['AlienInvasion'],
+     // excludeChunks: [ 'server' ]
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
-    })
+    }),
+  //   new MediaQueryPlugin({
+  //     include: [
+  //         'src/2048-master/style/exam'
+  //     ],
+  //     queries: {
+  //         'media, screen and (max-width: 520px)': 'mobile'
+  //     }
+  // })
   ]
 }

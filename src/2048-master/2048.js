@@ -1,5 +1,8 @@
 
 import './main.css';
+if (window.innerWidth <=520) {
+    import('./style/exam-mobile.css');
+}
 
 import './js/bind_polyfill';
 import './js/classlist_polyfill';
