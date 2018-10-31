@@ -1,4 +1,4 @@
-import './base.css';
 
+import './base.css';
+import './game';
 import './engine';
-import './game'

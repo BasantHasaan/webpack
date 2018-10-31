@@ -1,3 +1,6 @@
+import {Game, Sprite, TitleScreen, GameBoard, Level,GamePoints} from './engine';
+//import Game from './engine';
+
 var sprites = {
  ship: { sx: 0, sy: 0, w: 37, h: 42, frames: 1 },
  missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 },
@@ -22,7 +25,7 @@ var enemies = {
               B: 150, C: 1.2, E: 75 }
 };
 
-export var OBJECT_PLAYER = 1,
+var OBJECT_PLAYER = 1,
     OBJECT_PLAYER_PROJECTILE = 2,
     OBJECT_ENEMY = 4,
     OBJECT_ENEMY_PROJECTILE = 8,
@@ -71,7 +74,6 @@ var winGame = function() {
                                   "Press fire to play again",
                                   playGame));
 };
-
 
 var loseGame = function() {
   Game.setBoard(3,new TitleScreen("You lose!", 
@@ -302,4 +304,4 @@ window.addEventListener("load", function() {
 });
 
 
-export {sprites,enemies,startGame,level1,playGame,winGame,loseGame,Starfield,PlayerMissile,PlayerShip,Enemy,EnemyMissile,Explosion}
+export {enemies,Enemy};

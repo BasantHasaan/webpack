@@ -1,4 +1,6 @@
-const Engine = (function() {
+// import '../../Public/images/Alien/sprites.png';
+import {enemies,Enemy} from './game'
+(function() {
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -145,7 +147,7 @@ var SpriteSheet = new function() {
     this.map = spriteData;
     this.image = new Image();
     this.image.onload = callback;
-    this.image.src = 'images/sprites.png';
+    this.image.src='../Public/images/Alien/sprites.png';
   };
 
   this.draw = function(ctx,sprite,x,y,frame) {
@@ -451,4 +453,5 @@ var GamePoints = function() {
   this.step = function(dt) { };
 };
 
-export {GamePoints,TouchControls,Level,Sprite,GameBoard,SpriteSheet,TitleScreen,Game,Engine,container}
+export {Game, Sprite, TitleScreen, GameBoard, Level,Enemy,GamePoints};
+

@@ -9,14 +9,19 @@ module.exports = {
   entry: {
     main: './src/index.js',
     cards: './src/2048-master/2048.js',
-    AlienInvasion: './src/AlienInvasion-master/base.js'
+    AlienInvasion: './src/AlienInvasion-master/base.js',
+    bird: './src/bird/bird.js',
+    pacman: './src/pacman/pacman.js'
 
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
+    //publicPath: '/',
     filename: '[name].js'
   },
+  devServer: {
+    contentBase: 'Public'
+},
   target: 'web',
   devtool: 'source-map',
   // Webpack 4 does not have a CSS minifier, although
@@ -54,18 +59,15 @@ module.exports = {
       },
       {
         // Loads images into CSS and Javascript files
-       test: /\.(png|svg|jpg|gif)$/,
-        use: [{loader: "url-loader"}]
-      },
-      {
-        // Loads images into CSS and Javascript files
        test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif)(\?v=\d+\.\d+\.\d+)?$/,
+       exclude: /node_modules/,
         use: [{loader: "url-loader",
         options: {
+          //loader: 'url-loader?limit=8192&name=images/[name].[ext]'
           // limit: 50000,
           // mimetype: "application/font-woff",
-          name: "./fonts/[name].[ext]", // Output below ./fonts
-          publicPath: "../", // Take the directory into account
+          //name: "./fonts/[name].[ext]", // Output below ./fonts
+          // publicPath: "../", // Take the directory into account
         }}],
       },
       {
@@ -83,13 +85,25 @@ module.exports = {
     }),
     new HtmlWebPackPlugin({
       template: "./src/2048-master/index.html",
-      filename: "./cards.html",
+      filename: "cards.html",
       chunks: ['cards'],
      // excludeChunks: [ 'server' ]
     }),  new HtmlWebPackPlugin({
       template: "./src/AlienInvasion-master/index.html",
-      filename: "./AlienInvasion.html",
+      filename: "AlienInvasion.html",
       chunks: ['AlienInvasion'],
+     // excludeChunks: [ 'server' ]
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/bird/index.html",
+      filename: "bird.html",
+      chunks: ['bird'],
+     // excludeChunks: [ 'server' ]
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/pacman/index.htm",
+      filename: "pacman.html",
+      chunks: ['pacman'],
      // excludeChunks: [ 'server' ]
     }),
     new MiniCssExtractPlugin({
