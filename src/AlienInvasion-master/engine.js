@@ -1,4 +1,4 @@
-// import '../../Public/images/Alien/sprites.png';
+// import '../../public/images/Alien/sprites.png';
 import {enemies,Enemy} from './game'
 (function() {
     var lastTime = 0;
@@ -147,7 +147,7 @@ var SpriteSheet = new function() {
     this.map = spriteData;
     this.image = new Image();
     this.image.onload = callback;
-    this.image.src='../Public/images/Alien/sprites.png';
+    this.image.src='../public/images/Alien/sprites.png';
   };
 
   this.draw = function(ctx,sprite,x,y,frame) {

@@ -1,4 +1,5 @@
 const path = require("path")
+const webpack = require("webpack")
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
@@ -9,7 +10,7 @@ module.exports = {
   entry: {
     main: './src/index.js',
     cards: './src/2048-master/2048.js',
-    AlienInvasion: './src/AlienInvasion-master/base.js',
+    alienInvasion: './src/AlienInvasion-master/base.js',
     bird: './src/bird/bird.js',
     pacman: './src/pacman/pacman.js'
 
@@ -20,7 +21,7 @@ module.exports = {
     filename: '[name].js'
   },
   devServer: {
-    contentBase: 'Public'
+    contentBase: 'public'
 },
   target: 'web',
   devtool: 'source-map',
@@ -79,6 +80,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+  }),
     new HtmlWebPackPlugin({
       template: "./src/html/index.html",
       filename: "./index.html"
@@ -90,8 +95,8 @@ module.exports = {
      // excludeChunks: [ 'server' ]
     }),  new HtmlWebPackPlugin({
       template: "./src/AlienInvasion-master/index.html",
-      filename: "AlienInvasion.html",
-      chunks: ['AlienInvasion'],
+      filename: "alienInvasion.html",
+      chunks: ['alienInvasion'],
      // excludeChunks: [ 'server' ]
     }),
     new HtmlWebPackPlugin({

@@ -42,11 +42,11 @@ body {
 
 @font-face {
   font-family: 'gamefont';
-  /* src: url('../../../Public/fonts/birds/gamefont.eot'); */
-  /* src: url('../../../Public/fonts/birds/gamefont.eot?#iefix') format('embedded-opentype'), */
-     /* url('../../../Public/fonts/birds/gamefont.woff') format('woff'), */
-     /* url('../../../Public/fonts/birds/gamefont.ttf') format('truetype'); */
-     /* url('../../../Public/fonts/birds/gamefont.svg#gamefont') format('svg'); */
+  /* src: url('../../../public/fonts/birds/gamefont.eot'); */
+  /* src: url('../../../public/fonts/birds/gamefont.eot?#iefix') format('embedded-opentype'), */
+     /* url('../../../public/fonts/birds/gamefont.woff') format('woff'), */
+     /* url('../../../public/fonts/birds/gamefont.ttf') format('truetype'); */
+     /* url('../../../public/fonts/birds/gamefont.svg#gamefont') format('svg'); */
   font-weight: normal;
   font-style: normal;
 }

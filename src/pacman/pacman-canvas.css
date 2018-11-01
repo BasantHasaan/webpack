@@ -131,7 +131,7 @@ audio {display: block; }
 	}
 
 .controlSound { 
-	background: url('../../Public/images/pacman/img/audio-icon.png');
+	background: url('../../public/images/pacman/img/audio-icon.png');
 	width: 73px;
 	height: 50px;
 	position: relative;
