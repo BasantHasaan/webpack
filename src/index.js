@@ -1,15 +1,4 @@
-// import logMessage from './js/logger'
-import './css/style.css'
-// import 'jquery-countdown';
 import  'jquery';
-// require('jquery-countdown');
-// $(document).ready(function () {
-//     //your code here
-
-    // $('#getting-started').countdown('2019/01/01', function(event) {
-    //     $(this).html(event.strftime('%M:%S'));
-    //   });
-  //});
   function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {

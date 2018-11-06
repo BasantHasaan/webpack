@@ -12,7 +12,9 @@ module.exports = {
     cards: './src/2048-master/2048.js',
     alienInvasion: './src/AlienInvasion-master/base.js',
     bird: './src/bird/bird.js',
-    pacman: './src/pacman/pacman.js'
+    pacman: './src/pacman/pacman.js',
+    travel: './src/travel/travel.js'
+
 
   },
   output: {
@@ -38,6 +40,9 @@ module.exports = {
     ]
   },
   module: {
+    
+     
+    
     rules: [
       {
         // Transpiles ES6-8 into ES5
@@ -47,6 +52,13 @@ module.exports = {
           loader: "babel-loader"
         }
       },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+ 
+       
+     
       {
         // Loads the javacript into html template provided.
         // Entry point is set below in HtmlWebPackPlugin in Plugins 
@@ -60,7 +72,7 @@ module.exports = {
       },
       {
         // Loads images into CSS and Javascript files
-       test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif)(\?v=\d+\.\d+\.\d+)?$/,
+       test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif|PNG)(\?v=\d+\.\d+\.\d+)?$/,
        exclude: /node_modules/,
         use: [{loader: "url-loader",
         options: {
@@ -82,18 +94,24 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       $: "jquery",
-      jQuery: "jquery"
+      jQuery: "jquery",
+     // Hammer: "jquery-hammerjs/jquery.hammer.js"
   }),
+//   new webpack.ProvidePlugin({
+//     Hammer: "hammerjs"
+// }),
     new HtmlWebPackPlugin({
       template: "./src/html/index.html",
-      filename: "./index.html"
+      filename: "./index.html",
+      chunks: ['main'],
     }),
     new HtmlWebPackPlugin({
       template: "./src/2048-master/index.html",
       filename: "cards.html",
       chunks: ['cards'],
      // excludeChunks: [ 'server' ]
-    }),  new HtmlWebPackPlugin({
+    }),
+    new HtmlWebPackPlugin({
       template: "./src/AlienInvasion-master/index.html",
       filename: "alienInvasion.html",
       chunks: ['alienInvasion'],
@@ -106,9 +124,15 @@ module.exports = {
      // excludeChunks: [ 'server' ]
     }),
     new HtmlWebPackPlugin({
-      template: "./src/pacman/index.htm",
+      template: "./src/pacman/index.html",
       filename: "pacman.html",
       chunks: ['pacman'],
+     // excludeChunks: [ 'server' ]
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/travel/index.html",
+      filename: "travel.html",
+      chunks: ['travel'],
      // excludeChunks: [ 'server' ]
     }),
     new MiniCssExtractPlugin({

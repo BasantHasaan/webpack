@@ -8,7 +8,21 @@
 	
 	author: platzh1rsch		(www.platzh1rsch.ch)
 	
--------------------------------------------------------------------*/
+// -------------------------------------------------------------------*/
+// var $ = require('jquery/src/core');
+
+// import '../../public/js/jquery'
+// require('jquery/src/ajax');
+// require('jquery/src/ajax/xhr');
+// import {ajax }from 'jquery'
+import './jquery-1.10.2.min.js'
+import 'hammerjs'
+
+import 'jquery-hammerjs'
+// import { error } from 'util';
+// import * as mapConfig from '../../public/js/map.json';
+// import ''
+// import 'jquery'
 
 "use strict";
 
@@ -20,53 +34,53 @@ function geronimo() {
 	var game;
 	var canvas_walls, context_walls;
 	var inky, blinky, clyde, pinky;
-
-	var mapConfig = "data/map.json";
-
+// import * as mapConfig from 
+	var mapConfig = '../public/js/map.json';
+console.log(mapConfig);
 
 	/* AJAX stuff */
-	function getHighscore() {
-		setTimeout(ajax_get,30);
-	}
-	function ajax_get() {
-		var date = new Date().getTime();
-		$.ajax({
-		   datatype: "json",
-		   type: "GET",
-		   url: "data/db-handler.php",
-		   data: {
-			 timestamp: date,
-			 action: "get"
-			 },
-		   success: function(msg){
-			 $("#highscore-list").text("");
-			 for (var i = 0; i < msg.length; i++) {
-				$("#highscore-list").append("<li>"+msg[i]['name']+"<span id='score'>"+msg[i]['score']+"</span></li>");
-			 }
-		   } 
-		});
-	}
-	function ajax_add(n, s, l) {
+	// function getHighscore() {
+	// 	setTimeout(ajax_get,30);
+	// }
+	// function ajax_get() {
+	// 	var date = new Date().getTime();
+	// 	$.ajax({
+	// 	   datatype: "json",
+	// 	   type: "GET",
+	// 	   url: "data/db-handler.php",
+	// 	   data: {
+	// 		 timestamp: date,
+	// 		 action: "get"
+	// 		 },
+	// 	   success: function(msg){
+	// 		 $("#highscore-list").text("");
+	// 		 for (var i = 0; i < msg.length; i++) {
+	// 			$("#highscore-list").append("<li>"+msg[i]['name']+"<span id='score'>"+msg[i]['score']+"</span></li>");
+	// 		 }
+	// 	   } 
+	// 	});
+	// }
+	// function ajax_add(n, s, l) {
 
-		$.ajax({
-		   type: 'POST',
-		   url: 'data/db-handler.php',
-		   data: {
-			 action: 'add',
-			 name: n,
-			 score: s,
-			 level: l
-			 },
-		   dataType: 'json',
-		   success: function(data) {
-				console.log('Highscore added: ' + data);
-				$('#highscore-form').html('<span class="button" id="show-highscore">View Highscore List</span>');
-			},
-			error: function(errorThrown) {
-				console.log(errorThrown);
-			}
-		});
-	}
+	// 	$.ajax({
+	// 	   type: 'POST',
+	// 	   url: 'data/db-handler.php',
+	// 	   data: {
+	// 		 action: 'add',
+	// 		 name: n,
+	// 		 score: s,
+	// 		 level: l
+	// 		 },
+	// 	   dataType: 'json',
+	// 	   success: function(data) {
+	// 			console.log('Highscore added: ' + data);
+	// 			$('#highscore-form').html('<span class="button" id="show-highscore">View Highscore List</span>');
+	// 		},
+	// 		error: function(errorThrown) {
+	// 			console.log(errorThrown);
+	// 		}
+	// 	});
+	// }
 
 	function addHighscore() {
 			var name = $("input[type=text]").val();
@@ -356,15 +370,21 @@ function geronimo() {
 			
 			// get Level Map
 			$.ajax({
-				url: mapConfig,
+				url: "../public/js/map.json",
 				async: false,
 				 beforeSend: function(xhr){
 					if (xhr.overrideMimeType) xhr.overrideMimeType("application/json"); 
 				},
 				dataType: "json",
+				// method: 'get',
 				success: function (data) {
+					console.log(data)
 					game.map =  data;
+				},
+				error: function(error){
+					console.log(error);
 				}
+				
 			});
 		
 			var temp = 0;
@@ -1294,35 +1314,42 @@ function checkAppCache() {
 			game.showContent('highscore-content');
 			getHighscore();
 		});
+		// var myElement = document.getElementById('container');
+		// console.log(myElement);
+
+// create a simple instance
+// by default, it only adds horizontal recognizers
+// var mc = new Hammer(myElement);
+		//var hammer = new Hammer();
 		
 		// Hammerjs Touch Events
 		/*Hammer('#canvas-container').on("tap", function(event) {
 			if (!(game.gameOver == true))	game.pauseResume();
 		});*/
-		Hammer('.container').on("swiperight", function(event) {
-			if ($('#game-content').is(":visible")) {
-				event.gesture.preventDefault();
-				pacman.directionWatcher.set(right);
-				}
-		});
-		Hammer('.container').on("swipeleft", function(event) {
-			if ($('#game-content').is(":visible")) {
-				event.gesture.preventDefault();
-				pacman.directionWatcher.set(left);
-			}
-		});
-		Hammer('.container').on("swipeup", function(event) {
-			if ($('#game-content').is(":visible")) {
-				event.gesture.preventDefault();
-				pacman.directionWatcher.set(up);
-			}
-		});
-		Hammer('.container').on("swipedown", function(event) {
-			if ($('#game-content').is(":visible")) {
-				event.gesture.preventDefault();
-				pacman.directionWatcher.set(down);
-			}
-		});
+		// Hammer('.container').on("swiperight", function(event) {
+		// 	if ($('#game-content').is(":visible")) {
+		// 		event.gesture.preventDefault();
+		// 		pacman.directionWatcher.set(right);
+		// 		}
+		// });
+		// Hammer('.container').on("swipeleft", function(event) {
+		// 	if ($('#game-content').is(":visible")) {
+		// 		event.gesture.preventDefault();
+		// 		pacman.directionWatcher.set(left);
+		// 	}
+		// });
+		// Hammer('.container').on("swipeup", function(event) {
+		// 	if ($('#game-content').is(":visible")) {
+		// 		event.gesture.preventDefault();
+		// 		pacman.directionWatcher.set(up);
+		// 	}
+		// });
+		// Hammer('.container').on("swipedown", function(event) {
+		// 	if ($('#game-content').is(":visible")) {
+		// 		event.gesture.preventDefault();
+		// 		pacman.directionWatcher.set(down);
+		// 	}
+		// });
 		
 		// Mobile Control Buttons
 		$(document).on('touchend mousedown','#up',function(event) {
